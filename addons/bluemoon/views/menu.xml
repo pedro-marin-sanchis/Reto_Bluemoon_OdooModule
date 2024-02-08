@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu Structure -->
+    <data>
+        <!-- Actions -->
+
+        <record model="ir.actions.act_window" id="bluemoon.simulation_action">
+            <field name="name">Simulations</field>
+            <field name="res_model">bluemoon.simulation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="bluemoon.user_action">
+            <field name="name">Users</field>
+            <field name="res_model">bluemoon.user</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="bluemoon.catalogue_action_window">
+            <field name="name">Catalogue</field>
+            <field name="res_model">bluemoon.catalogue</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu -->
+
+        <menuitem id="bluemoon.root_menu" name="Blue Moon" />
+
+        <menuitem id="bluemoon.simulation_menu"
+                  name="Simulation"
+                  parent="bluemoon.root_menu"
+                  action="bluemoon.simulation_action" />
+
+        <menuitem id="bluemoon.user_menu"
+                  name="User"
+                  parent="bluemoon.root_menu"
+                  action="bluemoon.user_action" />
+
+        <menuitem name="Catalogue" id="bluemoon.catalogue_menu" parent="bluemoon.root_menu" action="bluemoon.catalogue_action_window"/>
+
+    </data>
+</odoo>
