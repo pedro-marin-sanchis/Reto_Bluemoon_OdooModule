@@ -71,11 +71,11 @@
       <field name="model">bluemoon.user</field>
       <field name="arch" type="xml">
         <graph string="User Simulations" type="bar">
-          <field name="name"/>
+          <field name="name" type="dimension"/>
           <field name="simulation_count" type="measure"/>
-          <field name="email"/>
-          <field name="phone"/>
-          <field name="address"/>
+          <field name="email" type="dimension"/>
+          <field name="phone" type="dimension"/>
+          <field name="address" type="dimension"/>
         </graph>
       </field>
     </record>
