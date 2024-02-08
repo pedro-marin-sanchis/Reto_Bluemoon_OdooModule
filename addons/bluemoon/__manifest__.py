@@ -33,4 +33,10 @@
     'demo': [
         'demo/demo.xml',
     ],
+
+    'assets': {
+        'web.assets_backend': [
+            'your_module_name/static/lib/Chart.min.js',
+        ],
+    },
 }

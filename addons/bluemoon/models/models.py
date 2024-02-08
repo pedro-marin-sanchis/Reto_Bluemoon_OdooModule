@@ -33,6 +33,13 @@ class User(models.Model):
 
     simulations = fields.One2many('bluemoon.simulation', 'user', string="Simulations")
 
+    simulation_count = fields.Integer(string="Simulation Count", compute="_compute_simulation_count", store=True)
+
+    @api.depends('simulations')
+    def _compute_simulation_count(self):
+        for user in self:
+            user.simulation_count = self.env['bluemoon.simulation'].search_count([('user', '=', user.id)])
+
 class Bluemoon_Catalogue(models.Model):
     _name = 'bluemoon.catalogue'
     _description = 'Catalogue for Blue Moon'
