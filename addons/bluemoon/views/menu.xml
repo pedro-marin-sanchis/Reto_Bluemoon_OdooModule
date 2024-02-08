@@ -19,7 +19,7 @@
         <record model="ir.actions.act_window" id="bluemoon.catalogue_action_window">
             <field name="name">Catalogue</field>
             <field name="res_model">bluemoon.catalogue</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,graph</field>
         </record>
 
         <!-- Menu -->

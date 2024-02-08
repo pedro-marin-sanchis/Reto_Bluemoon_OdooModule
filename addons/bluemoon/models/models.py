@@ -58,3 +58,15 @@ class Bluemoon_Catalogue(models.Model):
         ('925', '925 (92.5% purity)'),
         ('999', '999 (100% purity)')
     ], help="Select the purity level for silver")
+
+    total_sold_count = fields.Integer(string="Total Sold Count", compute='_compute_total_sold_count', store=True)
+
+    @api.depends('material_type', 'silver_quality')
+    def _compute_total_sold_count(self):
+        for product in self:
+            product.total_sold_count = self.env['bluemoon.catalogue'].search_count([
+                ('material_type', '=', product.material_type),
+                ('silver_quality', '=', product.silver_quality),
+                ('price', '=', product.price),
+                ('size', '=', product.size)
+            ])

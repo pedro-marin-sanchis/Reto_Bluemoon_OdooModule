@@ -1,90 +1,32 @@
 <odoo>
   <data>
     <!-- Views -->
-    <record id="bluemoon.simulation_form" model="ir.ui.view">
-      <field name="name">Simultaion</field>
-      <field name="model">bluemoon.simulation</field>
-      <field name="arch" type="xml">
-        <form string="Simulation">
-          <sheet>
-            <group>
-              <field name="user" />
-              <field name="silverQuantity" />
-              <field name="silverPrice" />
-              <field name="total" />
-            </group>
-          </sheet>
-        </form>
-      </field>
-    </record>
-
-    <record id="bluemoon.simulation_tree" model="ir.ui.view">
-      <field name="name">Simulations</field>
-      <field name="model">bluemoon.simulation</field>
-      <field name="arch" type="xml">
-        <tree string="Simulation Tree">
-          <field name="user" />
-          <field name="silverQuantity" />
-          <field name="silverPrice" />
-          <field name="total" />
-        </tree>
-      </field>
-    </record>
-
-    <record id="bluemoon.user_form" model="ir.ui.view">
-      <field name="name">User</field>
-      <field name="model">bluemoon.user</field>
-      <field name="arch" type="xml">
-        <form string="User">
-          <sheet>
-            <h1>
-              <field name="name"/>
-            </h1>
-            <group>
-
-              <field name="email"/>
-              <field name="phone"/>
-              <field name="address"/>
-              <field name="simulations"/>
-            </group>
-          </sheet>
-        </form>
-      </field>
-
-    </record>
-
-    <record id="bluemoon.user_tree" model="ir.ui.view">
-      <field name="name">Users</field>
-      <field name="model">bluemoon.user</field>
-      <field name="arch" type="xml">
-        <tree string="User Tree">
-          <field name="name" />
-          <field name="email" />
-          <field name="phone" />
-          <field name="address" />
-        </tree>
-      </field>
-    </record>
-
-    <record id="view_user_graph" model="ir.ui.view">
-      <field name="name">user.graph</field>
-      <field name="model">bluemoon.user</field>
-      <field name="arch" type="xml">
-        <graph string="User Simulations" type="bar">
-          <field name="name" type="dimension"/>
-          <field name="simulation_count" type="measure"/>
-          <field name="email" type="dimension"/>
-          <field name="phone" type="dimension"/>
-          <field name="address" type="dimension"/>
-        </graph>
-      </field>
-    </record>
-
-    <record model="ir.ui.view" id="bluemoon.catalogue_tree">
-      <field name="name">bluemoon.catalogue.tree</field>
+    <odoo>
+  <data>
+    <!-- Views -->
+    <record id="bluemoon.catalogue_form" model="ir.ui.view">
+      <field name="name">Catalogue Form</field>
       <field name="model">bluemoon.catalogue</field>
       <field name="arch" type="xml">
-        <tree>
+        <form string="Catalogue">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="material_type"/>
+              <field name="price"/>
+              <field name="size"/>
+              <field name="silver_quality"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="bluemoon.catalogue_tree" model="ir.ui.view">
+      <field name="name">Catalogues</field>
+      <field name="model">bluemoon.catalogue</field>
+      <field name="arch" type="xml">
+        <tree string="Catalogue Tree">
           <field name="name"/>
           <field name="material_type"/>
           <field name="price"/>
@@ -94,21 +36,27 @@
       </field>
     </record>
 
-
-    <record model="ir.ui.view" id="bluemoon_catalogue_form">
-      <field name="name">bluemoon.catalogue.form</field>
+    <record id="bluemoon.catalogue_graph" model="ir.ui.view">
+      <field name="name">catalogue.graph</field>
       <field name="model">bluemoon.catalogue</field>
       <field name="arch" type="xml">
-        <form>
-          <group colspan="2" col="2">
-            <field name="name"/>
-            <field name="material_type"/>
-            <field name="price"/>
-            <field name="size"/>
-            <field name="silver_quality"/>
-          </group>
-        </form>
+        <graph string="Catalogue Graph" type="bar">
+          <field name="name" type="dimension"/>
+          <field name="price" type="measure"/>
+          <field name="material_type" type="dimension"/>
+          <field name="size" type="measure"/>
+          <field name="silver_quality" type="dimension"/>
+        </graph>
       </field>
     </record>
+
+  </data>
+</odoo>
+
+
+
+
+
+
   </data>
 </odoo>
