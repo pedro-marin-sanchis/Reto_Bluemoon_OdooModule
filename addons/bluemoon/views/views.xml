@@ -1,9 +1,6 @@
 <odoo>
   <data>
     <!-- Views -->
-    <odoo>
-  <data>
-    <!-- Views -->
     <record id="bluemoon.catalogue_form" model="ir.ui.view">
       <field name="name">Catalogue Form</field>
       <field name="model">bluemoon.catalogue</field>
@@ -49,14 +46,51 @@
         </graph>
       </field>
     </record>
+    <record id="bluemoon.simulation_form" model="ir.ui.view">
+      <field name="name">Simulation Form</field>
+      <field name="model">bluemoon.simulation</field>
+      <field name="arch" type="xml">
+        <form string="Simulation">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="silverQuantity"/>
+              <field name="silverPrice"/>
+              <field name="user"/>
+              <field name="total"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
 
-  </data>
-</odoo>
+    <record id="bluemoon.simulation_tree" model="ir.ui.view">
+      <field name="name">Simulations</field>
+      <field name="model">bluemoon.simulation</field>
+      <field name="arch" type="xml">
+        <tree string="Simulation Tree">
+          <field name="name"/>
+          <field name="silverQuantity"/>
+          <field name="silverPrice"/>
+          <field name="user"/>
+          <field name="total"/>
+        </tree>
+      </field>
+    </record>
 
-
-
-
-
+    <record id="bluemoon.simulation_graph" model="ir.ui.view">
+      <field name="name">simulation.graph</field>
+      <field name="model">bluemoon.simulation</field>
+      <field name="arch" type="xml">
+        <graph string="Simulation Graph" type="bar">
+          <field name="name" type="dimension"/>
+          <field name="silverQuantity" type="measure"/>
+          <field name="silverPrice" type="measure"/>
+          <field name="user" type="dimension"/>
+          <field name="total" type="measure"/>
+        </graph>
+      </field>
+    </record>
 
   </data>
 </odoo>

@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 from odoo import models, fields, api
+
 
 class Simulation(models.Model):
     _name = 'bluemoon.simulation'
@@ -20,7 +20,11 @@ class Simulation(models.Model):
     @api.depends('user')
     def _compute_name(self):
         for record in self:
-            record.name = record.user.name + " Simulation - " + str(record.id)
+            if record.user and record.user.name:
+                record.name = record.user.name + " Simulation - " + str(record.id)
+            else:
+                record.name = "Simulation - " + str(record.id)
+
 
 class User(models.Model):
     _name = 'bluemoon.user'
@@ -32,13 +36,34 @@ class User(models.Model):
     address = fields.Char(string="Address", required=True)
 
     simulations = fields.One2many('bluemoon.simulation', 'user', string="Simulations")
-
     simulation_count = fields.Integer(string="Simulation Count", compute="_compute_simulation_count", store=True)
+    intercambios_exitosos = fields.Integer(string="Intercambios Exitosos",
+                                           compute="_compute_intercambios_exitosos_y_fallidos", store=True)
+    intercambios_fallidos = fields.Integer(string="Intercambios Fallidos",
+                                           compute="_compute_intercambios_exitosos_y_fallidos", store=True)
+    porcentaje_exitosos = fields.Float(string="Porcentaje de Intercambios Exitosos", compute="_compute_porcentajes",
+                                       store=True)
+    porcentaje_fallidos = fields.Float(string="Porcentaje de Intercambios Fallidos", compute="_compute_porcentajes",
+                                       store=True)
 
     @api.depends('simulations')
     def _compute_simulation_count(self):
         for user in self:
-            user.simulation_count = self.env['bluemoon.simulation'].search_count([('user', '=', user.id)])
+            user.simulation_count = len(user.simulations)
+
+    @api.depends('simulations.total')
+    def _compute_intercambios_exitosos_y_fallidos(self):
+        for user in self:
+            simulations = user.simulations.filtered(lambda s: s.total != 0)
+            user.intercambios_exitosos = len(simulations)
+            user.intercambios_fallidos = user.simulation_count - user.intercambios_exitosos
+
+    @api.depends('simulation_count', 'intercambios_exitosos')
+    def _compute_porcentajes(self):
+        for user in self:
+            user.porcentaje_exitosos = (user.intercambios_exitosos / user.simulation_count) * 100 if user.simulation_count > 0 else 0
+            user.porcentaje_fallidos = 100 - user.porcentaje_exitosos
+
 
 class Bluemoon_Catalogue(models.Model):
     _name = 'bluemoon.catalogue'
