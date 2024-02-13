@@ -35,6 +35,7 @@ class User(models.Model):
     phone = fields.Char(string="Phone", required=True)
     address = fields.Char(string="Address", required=True)
 
+
     simulations = fields.One2many('bluemoon.simulation', 'user', string="Simulations")
     simulation_count = fields.Integer(string="Simulation Count", compute="_compute_simulation_count", store=True)
     intercambios_exitosos = fields.Integer(string="Intercambios Exitosos",
@@ -65,6 +66,8 @@ class User(models.Model):
             user.porcentaje_fallidos = 100 - user.porcentaje_exitosos
 
 
+
+
 class Bluemoon_Catalogue(models.Model):
     _name = 'bluemoon.catalogue'
     _description = 'Catalogue for Blue Moon'
@@ -85,7 +88,7 @@ class Bluemoon_Catalogue(models.Model):
     ], help="Select the purity level for silver")
 
     total_sold_count = fields.Integer(string="Total Sold Count", compute='_compute_total_sold_count', store=True)
-
+    sold_count = fields.Integer(string="Sold Count", compute="_compute_sold_count", store=True)
     @api.depends('material_type', 'silver_quality')
     def _compute_total_sold_count(self):
         for product in self:
@@ -95,3 +98,7 @@ class Bluemoon_Catalogue(models.Model):
                 ('price', '=', product.price),
                 ('size', '=', product.size)
             ])
+
+    @api.depends('total_sold_count')
+    def _compute_sold_count(self):
+        self.sold_count = self.env['bluemoon.catalogue'].search_count([('total_sold_count', '>', 0)])
