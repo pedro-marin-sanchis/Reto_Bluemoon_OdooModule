@@ -7,7 +7,7 @@
         <record model="ir.actions.act_window" id="bluemoon.simulation_action">
             <field name="name">Simulations</field>
             <field name="res_model">bluemoon.simulation</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,graph</field>
         </record>
 
         <record model="ir.actions.act_window" id="bluemoon.user_action">
@@ -20,12 +20,6 @@
             <field name="name">Catalogue</field>
             <field name="res_model">bluemoon.catalogue</field>
             <field name="view_mode">tree,form,graph</field>
-        </record>
-
-          <record model="ir.actions.act_window" id="bluemoon.simulation_action">
-            <field name="name">Simulations</field>
-            <field name="res_model">bluemoon.simulation</field>
-            <field name="view_mode">tree,form</field>
         </record>
 
         <!-- Menu -->
@@ -43,15 +37,6 @@
                   action="bluemoon.user_action" />
 
         <menuitem name="Catalogue" id="bluemoon.catalogue_menu" parent="bluemoon.root_menu" action="bluemoon.catalogue_action_window"/>
-
-        <menuitem id="bluemoon.root_menu" name="Blue Moon" />
-
-        <menuitem id="bluemoon.simulation_menu"
-                  name="Simulation"
-                  parent="bluemoon.root_menu"
-                  action="bluemoon.simulation_action" />
-
-
 
     </data>
 </odoo>
